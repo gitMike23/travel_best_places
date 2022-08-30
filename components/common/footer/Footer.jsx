@@ -10,18 +10,17 @@ const navItems = [
   },
   {
     icon: 'explorer',
-    link: '/explorer'
+    link: '/explore'
   },
   {
     icon: 'place',
-    link: '/place'
+    link: '/place/kyoto'
   },
   {
     icon: 'person_outline',
     link: '/profile'
   },
 ]
- 
 
 const Footer = () => {
   const {push, asPath, pathname} = useRouter();
