@@ -1,5 +1,6 @@
 import { GetServerSideProps, GetStaticProps, NextPage } from "next";
 import Layout from "../components/common/Layout";
+import SearchSection from "../components/elements/Home/SearchSection/SearchSection";
 
 import styles from "../styles/Home.module.css";
 import { IPlace } from "../types/place";
@@ -9,7 +10,11 @@ interface IHome {
 }
 
 const Home: NextPage<IHome> = ({ places }) => {
-  return <Layout>{places.map((place) => place.location)}</Layout>;
+  return (
+    <Layout>
+      <SearchSection />
+    </Layout>
+  );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
