@@ -13,7 +13,7 @@ const SearchSection: FC = () => {
         backgroundImage: `url('${mapImg.src}')`,
       }}
     >
-      <div>
+      <div style={{ width: "80%", margin: "0 auto" }}>
         <h1>best places for trip</h1>
         <Search />
         <Filters />
