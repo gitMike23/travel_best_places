@@ -1,5 +1,5 @@
 import React from "react";
-import { FC } from "react";
+import { FC, useState } from "react";
 
 import styles from "./Filters.module.scss";
 const cities = [
@@ -10,11 +10,23 @@ const cities = [
   { location: "Brazil" },
   { location: "Norway" },
 ];
+
 const Filters: FC = () => {
+  const [filter, setFilter] = useState("");
+  const buttonClickHandler = (e) => {
+    const filter = e.target as HTMLElement;
+    return filter.innerText;
+  };
   return (
     <div className={styles.wrapper}>
       {cities.map((city) => (
-        <button key={city.location}>{city.location}</button>
+        <button
+          key={city.location}
+          onClick={(e) => setFilter(buttonClickHandler(e))}
+          className={filter === city.location ? styles.active : ""}
+        >
+          {city.location}
+        </button>
       ))}
     </div>
   );
