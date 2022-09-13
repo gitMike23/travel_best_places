@@ -7,7 +7,7 @@ const places: IPlace[] = [
   {
     slug: "kyoto",
     description: "ewq",
-    imagePath: japanImg.src,
+    imagePath: "http://localhost:3000/images/places/japan.jpeg",
     location: { country: "Japan", city: "Kyoto" },
     rating: 5,
     duration: "10 days",
@@ -18,7 +18,7 @@ const places: IPlace[] = [
   {
     slug: "venezia",
     description: "venez",
-    imagePath: italyImg.src,
+    imagePath: "http://localhost:3000/images/places/italy.jpeg",
     location: { country: "Italy", city: "Venezia" },
     rating: 5,
     duration: "2 days",

@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import Link from "next/link";
 
 import { IPlace } from "../../../../types/place";
 
@@ -13,11 +14,16 @@ const PopularPlaces: FC<IPopularPlaces> = ({ places }) => {
     <div className={styles.wrapper}>
       <h2>Popular places</h2>
       {places.map((place) => (
-        <div
-          key={place.slug}
-          className={styles.item}
-          style={{ backgroundImage: `url(${place.imagePath})` }}
-        ></div>
+        <Link href={`place/${place.slug}`} key={place.slug}>
+          <a
+            className={styles.item}
+            style={{ backgroundImage: `url(${place.imagePath})` }}
+          >
+            <span className={styles.heading}>
+              {`${place.location.city} ${place.location.country}`}
+            </span>
+          </a>
+        </Link>
       ))}
     </div>
   );
