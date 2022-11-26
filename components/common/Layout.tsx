@@ -1,14 +1,16 @@
-import React from 'react'
+import Footer from "./footer/Footer";
 
-import Footer from './footer/Footer'
-
-const Layout = (props) => {
-  return (
-    <div>
-        <div>{props.children}</div>
-        <Footer/>
-    </div>
-  )
+interface LayoutProps {
+  children?: React.ReactNode;
 }
 
-export default Layout
+const Layout = (props: LayoutProps) => {
+  return (
+    <div>
+      <div style={{ maxWidth: 480, margin: "0 auto" }}>{props.children}</div>
+      <Footer />
+    </div>
+  );
+};
+
+export default Layout;

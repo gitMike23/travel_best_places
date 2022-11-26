@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef } from "react";
+import React, { FC, useState, useRef, KeyboardEvent } from "react";
 
 import styles from "./Search.module.scss";
 
@@ -8,6 +8,12 @@ const Search: FC = () => {
 
   const searchClickHandler = () => {
     inputRef.current.focus();
+  };
+
+  const searchHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      console.log("yah");
+    }
   };
 
   return (
@@ -21,6 +27,7 @@ const Search: FC = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Search place..."
+        onKeyDown={searchHandler}
       />
     </div>
   );
