@@ -1,8 +1,14 @@
 import React, { FC, useState, useRef, KeyboardEvent } from "react";
+import { IPlace } from "../../../types/place";
+import { TypeSetState } from "../../../types/common";
 
 import styles from "./Search.module.scss";
 
-const Search: FC = () => {
+interface ISearch {
+  setPlaces: TypeSetState<IPlace[]>;
+}
+
+const Search: FC<ISearch> = ({ setPlaces }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const inputRef = useRef(null);
 
@@ -12,7 +18,6 @@ const Search: FC = () => {
 
   const searchHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      console.log("yah");
     }
   };
 

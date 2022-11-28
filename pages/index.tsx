@@ -1,4 +1,5 @@
-import { GetServerSideProps, GetStaticProps, NextPage } from "next";
+import { useState } from "react";
+import { GetStaticProps, NextPage } from "next";
 import Layout from "../components/common/Layout";
 import SearchSection from "../components/elements/Home/SearchSection/SearchSection";
 import Filters from "../components/elements/Filters/Filters";
@@ -9,16 +10,18 @@ import { IPlace } from "../types/place";
 import { API_URL } from "../components/constants";
 
 interface IHome {
-  places: IPlace[];
+  initialPlaces: IPlace[];
 }
 
-const Home: NextPage<IHome> = ({ places }) => {
+const Home: NextPage<IHome> = ({ initialPlaces }) => {
+  const [places, setPlaces] = useState(initialPlaces);
+
   return (
     <Layout>
       <SearchSection />
       <div style={{ width: "80%", margin: "0 auto" }}>
-        <Search />
-        <Filters />
+        <Search setPlaces={setPlaces} />
+        <Filters setPlaces={setPlaces} />
         <PopularPlaces places={places} />
       </div>
     </Layout>
@@ -27,10 +30,10 @@ const Home: NextPage<IHome> = ({ places }) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const result = await fetch(`${API_URL}/places`);
-  const places = await result.json();
+  const initialPlaces = await result.json();
   return {
     props: {
-      places,
+      initialPlaces,
     },
   };
 };
