@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef, KeyboardEvent } from "react";
+import React, { FC, useState, useRef, ChangeEvent } from "react";
 import { IPlace } from "../../../types/place";
 import { TypeSetState } from "../../../types/common";
 
@@ -6,9 +6,10 @@ import styles from "./Search.module.scss";
 
 interface ISearch {
   setPlaces: TypeSetState<IPlace[]>;
+  initialPlaces: IPlace[];
 }
 
-const Search: FC<ISearch> = ({ setPlaces }) => {
+const Search: FC<ISearch> = ({ setPlaces, initialPlaces }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const inputRef = useRef(null);
 
@@ -16,9 +17,19 @@ const Search: FC<ISearch> = ({ setPlaces }) => {
     inputRef.current.focus();
   };
 
-  const searchHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-    }
+  const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+
+    if (value) {
+      setPlaces(
+        initialPlaces.filter(
+          (place) =>
+            place.location.city.toLowerCase().includes(value) ||
+            place.location.country.toLowerCase().includes(value)
+        )
+      );
+    } else setPlaces(initialPlaces);
   };
 
   return (
@@ -30,9 +41,8 @@ const Search: FC<ISearch> = ({ setPlaces }) => {
         ref={inputRef}
         type="text"
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={searchHandler}
         placeholder="Search place..."
-        onKeyDown={searchHandler}
       />
     </div>
   );
