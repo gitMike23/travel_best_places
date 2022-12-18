@@ -1,9 +1,9 @@
-import { IPlace } from "../../types/place";
+import { IPlace } from "../../../types/place";
 import { NextApiRequest, NextApiResponse } from "next";
 import japanImg from "../../assets/images/japan.jpeg";
 import italyImg from "../../assets/images/italy.jpeg";
 
-const places: IPlace[] = [
+export const places: IPlace[] = [
   {
     slug: "kyoto",
     description: "ewq",
