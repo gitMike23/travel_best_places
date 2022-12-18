@@ -21,7 +21,7 @@ const Home: NextPage<IHome> = ({ initialPlaces }) => {
       <SearchSection />
       <div style={{ width: "80%", margin: "0 auto" }}>
         <Search setPlaces={setPlaces} initialPlaces={initialPlaces} />
-        <Filters setPlaces={setPlaces} />
+        <Filters setPlaces={setPlaces} initialPlaces={initialPlaces} />
         <PopularPlaces places={places} />
       </div>
     </Layout>

@@ -4,34 +4,47 @@ import { TypeSetState } from "../../../types/common";
 import { IPlace } from "../../../types/place";
 
 import styles from "./Filters.module.scss";
-const cities = [
-  { location: "Paris" },
-  { location: "Bora Bora" },
-  { location: "Maui" },
-  { location: "Tahiti" },
-  { location: "Brazil" },
+const countries = [
+  { location: "France" },
+  { location: "Italy" },
+  { location: "Japan" },
   { location: "Norway" },
+  { location: "Brazil" },
+  { location: "USA" },
 ];
 
 interface IFilters {
   setPlaces: TypeSetState<IPlace[]>;
+  initialPlaces: IPlace[];
 }
 
-const Filters: FC<IFilters> = ({ setPlaces }) => {
+const Filters: FC<IFilters> = ({ setPlaces, initialPlaces }) => {
   const [filter, setFilter] = useState("");
-  const buttonClickHandler = (e) => {
-    const filter = e.target as HTMLElement;
-    return filter.innerText;
+
+  const handleFilter = (location: string) => {
+    if (filter === location) {
+      setPlaces(initialPlaces);
+      setFilter("");
+    } else {
+      setPlaces(
+        initialPlaces.filter(
+          (place) =>
+            place.location.country.toLowerCase() === location.toLowerCase()
+        )
+      );
+      setFilter(location);
+    }
   };
+
   return (
     <div className={styles.wrapper}>
-      {cities.map((city) => (
+      {countries.map((country) => (
         <button
-          key={city.location}
-          onClick={(e) => setFilter(buttonClickHandler(e))}
-          className={filter === city.location ? styles.active : ""}
+          key={country.location}
+          onClick={() => handleFilter(country.location)}
+          className={filter === country.location ? styles.active : ""}
         >
-          {city.location}
+          {country.location}
         </button>
       ))}
     </div>
