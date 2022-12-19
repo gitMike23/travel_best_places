@@ -1,15 +1,17 @@
 import React from "react";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { API_URL } from "../../components/constants";
-import Layout from "../../components/common/Layout";
+import { Place } from "../../components/screens/place";
 import { IPlace } from "../../types/place";
+
+// This component needs to load all data from the server  for rendering a page
 
 interface IPlacePage {
   place: IPlace;
 }
 
-const Place: NextPage<IPlacePage> = ({ place }) => {
-  return <Layout>Place/{place.slug}</Layout>;
+const PlacePage: NextPage<IPlacePage> = ({ place }) => {
+  return <Place place={place} />;
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -32,4 +34,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-export default Place;
+export default PlacePage;
